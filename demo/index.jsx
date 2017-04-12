@@ -1,4 +1,6 @@
+import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import ContactForm from './components/ContactForm';
 import StringField from './components/StringField';
 import CheckboxField from './components/CheckboxField';
@@ -46,4 +48,18 @@ const componentMap = { ContactForm, StringField, CheckboxField };
 const contactForm = new ReactJsonSchema();
 contactForm.setComponentMap(componentMap);
 
-ReactDOM.render(contactForm.parseSchema(formSchema), document.getElementById('json-react-schema'));
+const ContactFormApp = () => (
+    <Router>
+      <div>
+        <ul><Link to="/">Form</Link></ul>
+        <ul><Link to="/about">About</Link></ul>
+
+        <Route exact path="/" render={props => contactForm.parseSchema(formSchema)} />
+        <Route path="/about" render={props => (
+          <p>React JSON Schema's demo is a form.</p>
+        )} />
+      </div>
+    </Router>
+)
+
+ReactDOM.render(<ContactFormApp />, document.getElementById('json-react-schema'));
