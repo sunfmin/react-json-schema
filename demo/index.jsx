@@ -16,30 +16,33 @@ const welcomeBanner = new ReactJsonSchema();
 ReactDOM.render(welcomeBanner.parseSchema(welcomeSchema), document.getElementById('welcome-banner'));
 
 const formSchema = {
-  'component': 'ContactForm',
-  'title': 'Tell us a little about yourself, we\'d appreciate it',
-  'children': [
-    {
-      'component': 'StringField',
-      'label': 'What\'s your name',
-      'name': 'fullname',
-      'help': 'It\'s okay, don\'t be shy :)'
-    },
-    {
-      'component': 'CheckboxField',
-      'checkboxes': [
-        {
-          'label': 'I\'m already checked!',
-          'defaultChecked': true,
-          'key': 0
-        },
-        {
-          'label': 'Here\'s another',
-          'key': 10
-        }
-      ]
-    }
-  ]
+  'component': 'div',
+  'children': [{
+    'component': 'ContactForm',
+    'title': 'Tell us a little about yourself, we\'d appreciate it',
+    'children': [
+      {
+        'component': 'StringField',
+        'label': 'What\'s your name',
+        'name': 'fullname',
+        'help': 'It\'s okay, don\'t be shy :)'
+      },
+      {
+        'component': 'CheckboxField',
+        'checkboxes': [
+          {
+            'label': 'I\'m already checked!',
+            'defaultChecked': true,
+            'key': 0
+          },
+          {
+            'label': 'Here\'s another',
+            'key': 10
+          }
+        ]
+      }
+    ]
+  }, 'Some random text at the end']
 };
 
 const componentMap = { ContactForm, StringField, CheckboxField };

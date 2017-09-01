@@ -24,7 +24,7 @@ var ReactJsonSchema = function () {
     value: function parseSchema(schema) {
       var element = null;
       var elements = null;
-      if (Object.prototype.toString.call(schema) === '[object Array]') {
+      if (Object.prototype.toString.call(schema) !== '[object Object]') {
         elements = this.parseSubSchemas(schema);
       } else {
         element = this.createComponent(schema);
@@ -42,9 +42,13 @@ var ReactJsonSchema = function () {
       var index = 0;
       Object.keys(subSchemas).forEach(function (key) {
         var subSchema = subSchemas[key];
-        subSchema.key = typeof subSchema.key !== 'undefined' ? subSchema.key : index;
-        Components.push(_this.parseSchema(subSchema));
-        index++;
+        if (Object.prototype.toString.call(subSchema) === '[object String]') {
+          Components.push(subSchema);
+        } else {
+          subSchema.key = typeof subSchema.key !== 'undefined' ? subSchema.key : index;
+          Components.push(_this.parseSchema(subSchema));
+          index++;
+        }
       });
       return Components;
     }
@@ -74,7 +78,7 @@ var ReactJsonSchema = function () {
           Component = schema.component;
         }
       } else {
-        throw new Error('ReactJsonSchema could not resolve a component due to a missing component \n          attribute in the schema.');
+        throw new Error('ReactJsonSchema could not resolve a component due to a missing component\n          attribute in the schema.');
       }
       return Component;
     }

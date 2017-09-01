@@ -118,6 +118,21 @@ export default describe('ReactJsonSchema', () => {
       expect(React.createElement).toHaveBeenCalledWith(jasmine.any(String), jasmine.any(Object), stringSchema.text);
       expect(reactJsonSchema.resolveComponentChildren).not.toHaveBeenCalled();
     });
+    it('should be able to run this regression', () => {
+      const test = {
+        component: 'p',
+        children: [
+          'This paragraph has ',
+          {
+            component: 'a',
+            href: 'http://google.com',
+            text: 'a link'
+          },
+          ' inside it'
+        ]
+      };
+      reactJsonSchema.parseSchema(test);
+    });
     it('should return an empty array if no child components are present.', () => {
       const actual = reactJsonSchema.resolveComponentChildren(schema);
       expect(Array.isArray(actual)).toBe(true);
