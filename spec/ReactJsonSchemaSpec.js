@@ -114,7 +114,7 @@ export default describe("ReactJsonSchema", () => {
 		});
 		it("should resolve native HTML tags.", () => {
 			spyOn(React, "createElement");
-			const stringSchema = { __component__: "h1" };
+			const stringSchema = { __component__: "a" };
 			reactJsonSchema.parseSchema(stringSchema);
 			expect(React.createElement).toHaveBeenCalledWith(
 				stringSchema.__component__,
