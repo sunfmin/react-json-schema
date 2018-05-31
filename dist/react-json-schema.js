@@ -92,7 +92,7 @@ var ReactJsonSchema = function () {
 					Component = schema.__component__;
 				} else if (componentMap && componentMap[schema.__component__]) {
 					Component = componentMap[schema.__component__];
-				} else if (_react.DOM.hasOwnProperty(schema.__component__)) {
+				} else {
 					Component = schema.__component__;
 				}
 			} else {
